@@ -1,0 +1,5 @@
+{
+    "title":"Security Rule Manager",
+    "pluginDir": "ruleManager",
+    "stage": "beta"
+}
