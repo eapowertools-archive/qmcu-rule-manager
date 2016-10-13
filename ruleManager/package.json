@@ -1,0 +1,25 @@
+{
+  "name": "qmcu-rule-manager",
+  "version": "1.0.0",
+  "description": "This QMC Utilities plugin allows you to import and export security rules from your Qlik Sense environment.",
+  "main": "rulemanager.component.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eapowertools/qmcu-rule-manager.git"
+  },
+  "author": "Qlik EAPowerTools",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eapowertools/qmcu-rule-manager/issues"
+  },
+  "homepage": "https://github.com/eapowertools/qmcu-rule-manager#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "fs": "0.0.1-security",
+    "qrs-interact": "^2.1.0"
+  }
+}
