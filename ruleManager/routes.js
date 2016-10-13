@@ -21,12 +21,12 @@ var qrs = new qrsInteract(qrsConfig);
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
-router.use('/data', express.static(config.thisServer.pluginPath + "/rulemanager/data"));
-router.use('/output', express.static(config.thisServer.pluginPath + "/rulemanager/output"));
+router.use('/data', express.static(config.thisServer.pluginPath + "/ruleManager/data"));
+router.use('/output', express.static(config.thisServer.pluginPath + "/ruleManager/output"));
 router.use(autoReap);
 autoReap.options.reapOnError= true;
 
-var destDir = path.join(config.thisServer.pluginPath, "rulemanager/uploads/");
+var destDir = path.join(config.thisServer.pluginPath, "ruleManager/uploads/");
 var upload = multer({ dest: destDir});
 
 
@@ -34,7 +34,7 @@ router.route('/getRules')
     .get(function(request,response)
     {
         //first get the table file;
-        var tableDef = fs.readFileSync(config.thisServer.pluginPath + "/rulemanager/data/tableDef.json");
+        var tableDef = fs.readFileSync(config.thisServer.pluginPath + "/ruleManager/data/tableDef.json");
 
         var filter = "((category+eq+%27Security%27))";
 
@@ -74,7 +74,7 @@ router.route('/exportRules')
                 {
                     console.log('selection deleted');
                     //time to create the file and download it.
-                    var file = config.thisServer.pluginPath + '/rulemanager/output/rules.json';
+                    var file = config.thisServer.pluginPath + '/ruleManager/output/rules.json';
                     var destFile = fs.createWriteStream(file);
                     destFile.on('finish', function()
                     {

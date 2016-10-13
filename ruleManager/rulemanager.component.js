@@ -200,7 +200,7 @@
 
         model.openUpload = function () {
             ngDialog.open({
-                template: "plugins/rulemanager/upload-body.html",
+                template: "plugins/ruleManager/upload-body.html",
                 className: "wizard-modal",
                 controller: ruleBodyController,
                 scope: $scope
@@ -209,7 +209,7 @@
 
         model.openImport = function () {
             ngDialog.open({
-                template: "plugins/rulemanager/import-dialog.html",
+                template: "plugins/ruleManager/import-dialog.html",
                 className: "import-dialog",
                 controller: ruleBodyController,
                 scope: $scope
@@ -272,7 +272,7 @@
 
         model.openHelp = function () {
             ngDialog.open({
-                template: "plugins/rulemanager/help-dialog.html",
+                template: "plugins/ruleManager/help-dialog.html",
                 className: "help-dialog",
                 controller: ruleBodyController,
                 scope: $scope
@@ -292,7 +292,7 @@
 
     module.component("ruleManagerBody", {
         transclude: true,
-        templateUrl: "plugins/rulemanager/rule-manager-body.html",
+        templateUrl: "plugins/ruleManager/rule-manager-body.html",
         controllerAs: "model",
         controller: ["$scope", "$http", "ngDialog", "Upload", ruleBodyController]
     });
