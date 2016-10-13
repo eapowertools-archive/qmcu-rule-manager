@@ -20,6 +20,7 @@
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "extend": "^3.0.0",
     "fs": "0.0.1-security",
     "multer": "^1.2.0",
     "multer-autoreap": "^0.1.2",
