@@ -20,7 +20,7 @@
     function exportRules($http, ruleIds) {
         return $http.post('/rulemanager/exportRules', ruleIds)
             .success(function (data, status, headers, config) {
-                var jsonBlob = new Blob([JSON.stringify(data)], {
+                var jsonBlob = new Blob([JSON.stringify(data, null, " ") + '\n'], {
                         type: "application/json;charset=utf-8;"
                     });
                 var fileName = "exported-rules.json";
