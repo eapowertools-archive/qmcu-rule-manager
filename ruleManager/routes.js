@@ -117,6 +117,7 @@ router.route('/importRules')
                         delete systemRuleToAdd.createdDate;
                         delete systemRuleToAdd.modifiedByUserName;
                         delete systemRuleToAdd.modifiedDate;
+                        delete systemRuleToAdd.tags
                         return qrs.Post(
                             'systemrule',
                             rule,
