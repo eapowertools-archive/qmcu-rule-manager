@@ -81,9 +81,8 @@
                         </div>
                     </td>
                     <td class="resource">
-                        <div class="foo" ng-bind-html="row[2] | highlight:searchRules">{{row[2]}}
-                            <div class="foo2">{{model.splitText(row[2],',')}}</div>
-                        </div>
+                        <div class="foo" ng-bind-html="row[2] | highlight:searchRules">{{row[2]}}</div>
+                        <div class="foo2">{{model.splitText(row[2],',')}}</div>
                     </td>
                     <td>
                         <div ng-repeat="action in model.actionConverter(row[3]) track by $index" ng-bind-html="action | highlight:searchRules">

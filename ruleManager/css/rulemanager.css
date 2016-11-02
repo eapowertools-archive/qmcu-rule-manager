@@ -115,9 +115,14 @@
 
 }
 
-.ruleManager .foo:hover .foo2{
+.ruleManager .resource:hover .foo2{
     
     visibility:visible;
+}
+
+.ruleManager tbody tr:hover, tr.alt:hover {
+    color: #ffffff;
+    background-color: #595959;
 }
 
 /*.drop-box {
