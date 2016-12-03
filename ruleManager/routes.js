@@ -109,23 +109,50 @@ router.route('/importRules')
     {
         return promise.map(request.body, function(rule) {
             var localId = rule.id;
+            var systemRuleToAdd = {};
             return qrs.Get('systemrule/full?filter=id eq ' + rule.id + " or name eq '" + rule.name + "'")
             .then(function (result) {
                     var localResult = result.body;
                     if (localResult.length == 0) {
-                        var systemRuleToAdd = rule;
+                        systemRuleToAdd = rule;
+                        systemRuleToAdd.seedId = rule.id;
                         delete systemRuleToAdd.createdDate;
                         delete systemRuleToAdd.modifiedByUserName;
                         delete systemRuleToAdd.modifiedDate;
-                        delete systemRuleToAdd.tags
+                        delete systemRuleToAdd.tags;
+                        console.log(systemRuleToAdd);
                         return qrs.Post(
                             'systemrule',
-                            rule,
+                            systemRuleToAdd,
                             'json'
                         ).then(function (postResponse, reject) {
-                            return {"id":localId, "state":"Added"};
+                            return {"id":localId, "seedId":localId ,"state":"Added"};
                         }).catch(function(error) {
-                            return {"id":localId, "state":"Failed. " + error};
+                            //test again with a new id and see what happens
+                            console.log("trying again");
+                            return "trying again";
+                        })
+                        .then(function()
+                        {
+                            systemRuleToAdd = rule;
+                            systemRuleToAdd.seedId = rule.id;
+                            delete systemRuleToAdd.createdDate;
+                            delete systemRuleToAdd.modifiedByUserName;
+                            delete systemRuleToAdd.modifiedDate;
+                            delete systemRuleToAdd.tags;
+                            delete systemRuleToAdd.id;
+                            console.log("seriously, we are trying again.");
+                            return qrs.Post(
+                                'systemrule',
+                                systemRuleToAdd,
+                                'json'
+                            ).then(function (postResponse, reject) {
+                                console.log("IRAN");
+                                console.log(postResponse);
+                                return {"id":postResponse.body.id, "seedId": postResponse.body.seedId,"state":"Added"};
+                            }).catch(function(error) {
+                                return {"id":postResponse.body.id, "seedId": postResponse.body.seedId, "state":"Failed. " + error};
+                            });
                         });
                     } else if (localResult.length == 1) {
                         var systemRuleToUpdate = rule;
@@ -138,19 +165,21 @@ router.route('/importRules')
                             'systemrule/' + existingID,
                             systemRuleToUpdate
                         ).then(function (putResponse) {
-                            return {"id":localId, "state":"Updated"};
-                        }).catch(function (reject) {
-                            return {"id":localId, "state":"Failed. " + error};
+                            return {"id":localId, "seedId":localId , "state":"Updated"};
+                        }).catch(function (error) {
+                            return {"id":localId, "seedId":localId , "state":"Failed. " + error};
                         });
 
                     } else {
-                        return {"id":localId, "state":"Failed. More than 1 rule found matching this ID or Name."};
+                        return {"id":localId, "seedId":localId , "state":"Failed. More than 1 rule found matching this ID or Name."};
                     }
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         }).then(function (mapResult) {
+            console.log("I get to the mapResult");
+            console.log(mapResult);
             response.send(mapResult);
         });
     });

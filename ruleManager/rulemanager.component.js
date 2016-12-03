@@ -254,7 +254,7 @@
                 .then(function (mapResult) {
                     model.imports.forEach(function (element) {
                         var state = mapResult.data.filter(function (result) {
-                            return result.id == element.id
+                            return result.seedId == element.id
                         })[0].state;
                         element.importStatus = state;
                     }, this);
