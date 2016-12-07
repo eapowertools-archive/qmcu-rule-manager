@@ -120,7 +120,6 @@ router.route('/importRules')
                         delete systemRuleToAdd.modifiedByUserName;
                         delete systemRuleToAdd.modifiedDate;
                         delete systemRuleToAdd.tags;
-                        console.log(systemRuleToAdd);
                         return qrs.Post(
                             'systemrule',
                             systemRuleToAdd,
@@ -141,13 +140,11 @@ router.route('/importRules')
                             delete systemRuleToAdd.modifiedDate;
                             delete systemRuleToAdd.tags;
                             delete systemRuleToAdd.id;
-                            console.log("seriously, we are trying again.");
                             return qrs.Post(
                                 'systemrule',
                                 systemRuleToAdd,
                                 'json'
                             ).then(function (postResponse, reject) {
-                                console.log("IRAN");
                                 console.log(postResponse);
                                 return {"id":postResponse.body.id, "seedId": postResponse.body.seedId,"state":"Added"};
                             }).catch(function(error) {
@@ -178,8 +175,6 @@ router.route('/importRules')
                     console.log(error);
                 });
         }).then(function (mapResult) {
-            console.log("I get to the mapResult");
-            console.log(mapResult);
             response.send(mapResult);
         });
     });
