@@ -1,28 +1,28 @@
-(function () {
+(function() {
     "use strict";
     var module = angular.module("QMCUtilities", ["ngFileUpload", "ngDialog"]);
 
     function fetchTableHeaders($http) {
-        return $http.get("/rulemanager/data/tableDef.json")
-            .then(function (response) {
+        return $http.get("./rulemanager/data/tableDef.json")
+            .then(function(response) {
                 return response.data;
             });
     }
 
     function fetchTableRows($http) {
-        return $http.get('/rulemanager/getRules')
+        return $http.get('./rulemanager/getRules')
             //return $http.get("data/testData.json")
-            .then(function (response) {
+            .then(function(response) {
                 return response.data;
             });
     }
 
     function exportRules($http, ruleIds) {
-        return $http.post('/rulemanager/exportRules', ruleIds)
-            .success(function (data, status, headers, config) {
+        return $http.post('./rulemanager/exportRules', ruleIds)
+            .success(function(data, status, headers, config) {
                 var jsonBlob = new Blob([JSON.stringify(data, null, " ") + '\n'], {
-                        type: "application/json;charset=utf-8;"
-                    });
+                    type: "application/json;charset=utf-8;"
+                });
                 var fileName = "exported-rules.json";
                 if (window.navigator.msSaveOrOpenBlob) {
                     // IE hack; see http://msdn.microsoft.com/en-us/library/ie/hh779016.aspx
@@ -37,7 +37,7 @@
                     link.click();
                 }
             })
-            .error(function (data, status, headers, config) {
+            .error(function(data, status, headers, config) {
                 console.log(status);
             });
     }
@@ -59,7 +59,7 @@
     function setExportColumns() {
         var i = 0;
 
-        $("colgroup").each(function () {
+        $("colgroup").each(function() {
 
             i++;
 
@@ -71,7 +71,7 @@
 
         i = 1;
 
-        $("td").each(function () {
+        $("td").each(function() {
 
             $(this).attr("rel", "col" + i);
 
@@ -83,13 +83,13 @@
 
         });
 
-        $("td").hover(function () {
+        $("td").hover(function() {
 
             $(this).parent().addClass("hover");
             var curCol = $(this).attr("rel");
             $("#" + curCol).addClass("hover");
 
-        }, function () {
+        }, function() {
 
             $(this).parent().removeClass("hover");
             var curCol = $(this).attr("rel");
@@ -129,31 +129,31 @@
         model.importColumnNames = [];
         model.importTableRows = [];
 
-        model.$onInit = function () {
-            fetchTableHeaders($http).then(function (table) {
+        model.$onInit = function() {
+            fetchTableHeaders($http).then(function(table) {
                     model.columnNames = table.columns;
                 })
-                .then(function () {
-                    fetchTableRows($http).then(function (response) {
+                .then(function() {
+                    fetchTableRows($http).then(function(response) {
                         model.tableRows = response.rows;
                     });
                 });
             setExportColumns();
         };
 
-        model.exportrules = function () {
+        model.exportrules = function() {
             exportRules($http, model.outputs)
-                .then(function (response) {
+                .then(function(response) {
 
                     model.outputs = [];
                     console.log(response);
                 })
-                .then(function () {
+                .then(function() {
                     $(".selectItem").prop('checked', false);
                 });
         }
 
-        model.setValue = function (isExport, checkme, $index, rule) {
+        model.setValue = function(isExport, checkme, $index, rule) {
             if (checkme) {
                 if (isExport) {
                     model.outputs.push(rule);
@@ -172,7 +172,7 @@
             console.log(model.outputs);
         };
 
-        model.checkme = function (checkme) {
+        model.checkme = function(checkme) {
             if (checkme) {
                 return true;
             } else {
@@ -180,25 +180,25 @@
             }
         }
 
-        model.getWidth = function () {
-            $(".th-column").each(function () {
+        model.getWidth = function() {
+            $(".th-column").each(function() {
                 console.log($(this).css('width'));
             });
         };
 
-        model.actionConverter = function (val) {
+        model.actionConverter = function(val) {
             return convertActionBin(val);
         };
 
-        model.splitTime = function (val) {
+        model.splitTime = function(val) {
             return splitTime(val);
         };
 
-        model.splitText = function (val, delim) {
+        model.splitText = function(val, delim) {
             return splitText(val, delim);
         };
 
-        model.openUpload = function () {
+        model.openUpload = function() {
             ngDialog.open({
                 template: "plugins/ruleManager/upload-body.html",
                 className: "wizard-modal",
@@ -207,7 +207,7 @@
             });
         };
 
-        model.openImport = function () {
+        model.openImport = function() {
             ngDialog.open({
                 template: "plugins/ruleManager/import-dialog.html",
                 className: "import-dialog",
@@ -216,12 +216,12 @@
             });
         };
 
-        model.selectFile = function (files) {
+        model.selectFile = function(files) {
             model.fileSelected = true;
             return model.file = files;
         };
 
-        model.upload = function () {
+        model.upload = function() {
             Upload.upload({
                     url: "/rulemanager/uploadRules",
                     data: {
@@ -229,7 +229,7 @@
                     },
                     arrayKey: ''
                 })
-                .then(function (response) {
+                .then(function(response) {
                     var newItemCount = 0;
                     //expose file to ui
                     model.file = [];
@@ -239,38 +239,38 @@
                     return model.rules = response.data;
 
                 })
-                .then(function (rulesData) {
-                    fetchTableHeaders($http).then(function (table) {
+                .then(function(rulesData) {
+                    fetchTableHeaders($http).then(function(table) {
                             model.importColumnNames = table.columns;
                         })
-                        .then(function () {
+                        .then(function() {
                             model.importTableRows = rulesData;
                         });
                 });
         };
 
-        model.importRules = function () {
+        model.importRules = function() {
             $http.post('/rulemanager/importRules', JSON.stringify(model.imports))
-                .then(function (mapResult) {
-                    model.imports.forEach(function (element) {
-                        var state = mapResult.data.filter(function (result) {
+                .then(function(mapResult) {
+                    model.imports.forEach(function(element) {
+                        var state = mapResult.data.filter(function(result) {
                             return result.seedId == element.id
                         })[0].state;
                         element.importStatus = state;
                     }, this);
                     model.importTableRows = model.imports;
                     model.isImported = true;
-                    fetchTableRows($http).then(function (response) {
+                    fetchTableRows($http).then(function(response) {
                         model.tableRows = response.rows;
                     });
                     setExportColumns();
                 })
-                .catch(function (error) {
+                .catch(function(error) {
                     console.log(error);
                 });
         };
 
-        model.openHelp = function () {
+        model.openHelp = function() {
             ngDialog.open({
                 template: "plugins/ruleManager/help-dialog.html",
                 className: "help-dialog",
@@ -279,7 +279,7 @@
             });
         };
 
-        model.closeDialog = function () {
+        model.closeDialog = function() {
             ngDialog.closeAll();
             model.imports = [];
             model.importTableRows = [];
@@ -297,8 +297,8 @@
         controller: ["$scope", "$http", "ngDialog", "Upload", ruleBodyController]
     });
 
-    module.filter('highlight', function () {
-        return function (text, search) {
+    module.filter('highlight', function() {
+        return function(text, search) {
             if (text && search) {
                 text = text.toString();
                 search = search.toString();

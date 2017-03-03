@@ -1,5 +1,9 @@
 {
-    "title":"Security Rule Manager",
+    "title": "Security Rule Manager",
     "pluginDir": "ruleManager",
-    "stage": "beta"
+    "stage": "beta",
+    "clientFiles": [
+        "plugins/ruleManager/ruleManager.component.js",
+        "plugins/ruleManager/css/ruleManager.css"
+    ]
 }
