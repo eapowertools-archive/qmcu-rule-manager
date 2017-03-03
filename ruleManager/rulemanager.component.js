@@ -223,7 +223,7 @@
 
         model.upload = function() {
             Upload.upload({
-                    url: "/rulemanager/uploadRules",
+                    url: "./rulemanager/uploadRules",
                     data: {
                         file: model.file
                     },
