@@ -250,7 +250,7 @@
         };
 
         model.importRules = function() {
-            $http.post('/rulemanager/importRules', JSON.stringify(model.imports))
+            $http.post('./rulemanager/importRules', JSON.stringify(model.imports))
                 .then(function(mapResult) {
                     model.imports.forEach(function(element) {
                         var state = mapResult.data.filter(function(result) {
