@@ -112,7 +112,7 @@
         return result;
     };
 
-    function ruleBodyController($scope, $http, ngDialog, Upload) {
+    function ruleBodyController($scope, $http, ngDialog, Upload, qmcuWindowLocationService) {
         var model = this;
         var colNames = [];
         model.isImported = false;
@@ -128,6 +128,7 @@
         model.fileSelected = false;
         model.importColumnNames = [];
         model.importTableRows = [];
+        model.host = qmcuWindowLocationService.host;
 
         model.$onInit = function() {
             fetchTableHeaders($http).then(function(table) {
@@ -294,7 +295,7 @@
         transclude: true,
         templateUrl: "plugins/ruleManager/rule-manager-body.html",
         controllerAs: "model",
-        controller: ["$scope", "$http", "ngDialog", "Upload", ruleBodyController]
+        controller: ["$scope", "$http", "ngDialog", "Upload", "qmcuWindowLocationService", ruleBodyController]
     });
 
     module.filter('highlight', function() {
