@@ -1,21 +1,21 @@
-<div class="navbar-fixed-top">
-    <div id="page-content-header">
-        <h1 class="title">Rule Manager</h1>
-        <button style="float:right;margin-right:20px;margin-top:20px;" class="lui-button  lui-button--toolbar-inverse" id="help-dialog"
-            ng-click="model.openHelp()">?</button>
+<div>
+    <div id="page-content-header" class="navbar-fixed-top flex-container">
+        <h1 class="title">Rule Manager on: {{model.host}}</h1>
+        <button style="float:right;margin-right:400px;margin-top:20px;" class="lui-button  lui-button--toolbar-inverse" id="help-dialog" ng-click="model.openHelp()">?</button>
     </div>
-</div>
-<div id="rule-body">
-    <div class="rule-search navbar-fixed-top">
-        <div class="lui-bg-inverse">
-            <div class="lui-search lui-search--inverse">
-                <span class="lui-search__search-icon"></span>
-                <input type="text" class="lui-search__input" maxlength="255" spellcheck="false" placeholder="Search" ng-model="searchRules"
-                />
-                <span class="lui-search__clear-icon"></span>
+    <div id="second-header">
+        <div id="page-content-search">
+            <div class="lui-bg-inverse">
+                <div class="lui-search lui-search--inverse" style="padding-left:5px">
+                    <span class="lui-search__search-icon"></span>
+                    <input type="text" class="lui-search__input" maxlength="255" spellcheck="false" placeholder="Search" ng-model="searchRules" />
+                    <span class="lui-search__clear-icon"></span>
+                </div>
             </div>
         </div>
     </div>
+</div>
+<div id="page-content-body">
     <div>
         <table class="table table-bordered" id="rules-table-header">
             <colgroup style="width:75px;"></colgroup>
@@ -136,8 +136,7 @@
     <div id="button-bar">
         <button id="importRules" class="lui-button  lui-button--toolbar-inverse" ng-click="model.openUpload()">Import Rules</button>
 
-        <button id="exportrules" class="lui-button" ng-class="model.outputs.length > 0 ? 'lui-button--toolbar-inverse' : 'lui-disabled'"
-            ng-click="model.exportrules()">Export {{model.outputs.length}} Rule(s)</button>
+        <button id="exportrules" class="lui-button" ng-class="model.outputs.length > 0 ? 'lui-button--toolbar-inverse' : 'lui-disabled'" ng-click="model.exportrules()">Export {{model.outputs.length}} Rule(s)</button>
     </div>
 </div>
 </div>

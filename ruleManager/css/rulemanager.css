@@ -1,129 +1,147 @@
-.ruleManager .navbar-fixed-top
-{
-    margin-left:250px;
+.ruleManager .flex-container {
+    display: -webkit-inline-flex;
+    /* Safari */
+    display: inline-flex;
+    -webkit-flex-wrap: nowrap;
+    /* Safari */
+    flex-wrap: nowrap;
+    -webkit-justify-content: space-between;
+    /* Safari */
+    justify-content: space-between;
+}
+
+.ruleManager .navbar-fixed-top {
+    margin-left: 250px;
 }
 
 .ruleManager #page-content-header {
-    background:#404040;
-    top:0;
-    height:69px;
-    width:100%;
-    line-height: 69px;
-    z-index:1000;
+    background: #404040;
+    top: 0;
+    height: 60px;
+    width: 100%;
+}
+
+.ruleManager #second-header {
+    position: fixed;
+    width: 100%;
+    top: 60px;
+    background: #404040;
+    z-index: 5000;
 }
 
 .ruleManager #page-content-search {
-    top:70px;
+    position: fixed;
+    top: 60px;
     height: 38px;
-    z-index:1000;
+    width: 100%;
+    z-index: 1000;
+}
 
+.ruleManager #page-content-body {
+    margin-top: 38px;
+    margin-bottom: 50px;
 }
 
 .ruleManager #page-content-footer {
-   position:fixed;
-   bottom:0px;
-   height:50px;
-   width:100%;
-   background: #8C8C8C;
+    position: fixed;
+    bottom: 0px;
+    height: 50px;
+    width: 100%;
+    background: #8C8C8C;
 }
 
 .ruleManager #button-bar {
-  position: absolute;
-  top: 50%;
-  left:10px;
-  transform: translateY(-50%);
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
 }
 
 .ruleManager .title {
-    color: rgba(255,255,255,0.8);
-    float:left;
+    color: rgba(255, 255, 255, 0.8);
+    float: left;
     font-size: 36px;
-    margin-top:15px;
-    padding-left:15px;
+    margin-top: 10px;
+    padding-left: 15px;
+    white-space: nowrap;
 }
 
-.ruleManager #select-box
-{
+.ruleManager #select-box {
     text-align: center;
     vertical-align: middle;
 }
 
-.ruleManager .rule-search{
-    margin-top:69px;
-    
+.ruleManager .rule-search {
+    margin-top: 69px;
 }
 
-.ruleManager #rules-table-header
-{
-    margin-top:107px;
+.ruleManager #rules-table-header {
     margin-bottom: 0px;
     border-collapse: collapse;
 }
 
-.ruleManager th{
+.ruleManager th {
     text-align: center;
     vertical-align: middle;
 }
 
-
-.ruleManager .rule-row{
-  overflow-x: hidden;
-  overflow-y: auto;
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  border-collapse: separate;
-
+.ruleManager .rule-row {
+    overflow-x: hidden;
+    overflow-y: auto;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    border-collapse: separate;
 }
 
-.ruleManager .rule-row > td {
+.ruleManager .rule-row>td {
     vertical-align: middle;
-  overflow: hidden;
-  text-overflow: ellipsis; 
-  /*overflow-wrap: break-word; */
- /*white-space: nowrap; */
-  cursor: default;
-  line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*overflow-wrap: break-word; */
+    /*white-space: nowrap; */
+    cursor: default;
+    line-height: 20px;
 }
 
-.ruleManager .resource .foo{
-     overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 100px;
-  width:100px;
+.ruleManager .resource .foo {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100px;
+    width: 100px;
 }
 
-.ruleManager .rule-row > td::last-child {
+.ruleManager .rule-row>td::last-child {
     border-right: 1px solid #D9D9D9;
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .ruleManager .foo2 {
-    visibility:hidden;
-    position:absolute;
-    z-index:1;
-    background-color:white;
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    background-color: white;
     border: 1px solid #595959;
-    border-radius:3px;
+    border-radius: 3px;
     padding: 8px;
-    width:300px;
-    color:#595959;
+    width: 300px;
+    color: #595959;
     white-space: pre-line;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
-.ruleManager .resource:hover .foo2{
-    
-    visibility:visible;
+.ruleManager .resource:hover .foo2 {
+    visibility: visible;
 }
 
-.ruleManager tbody tr:hover, tr.alt:hover {
+.ruleManager tbody tr:hover,
+tr.alt:hover {
     color: #ffffff;
     background-color: #595959;
 }
+
 
 /*.drop-box {
     background: #F8F8F8;
@@ -134,13 +152,14 @@
     padding-top: 25px;
     margin: 10px;
 }*/
+
 .dragover {
     border: 5px dashed blue;
 }
 
 .ng-file-upload .dragover {
     border-color: #aaa;
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.08)
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.08)
 }
 
 .ng-file-upload .dragover * {
@@ -149,29 +168,24 @@
     opacity: .3
 }
 
-@media (max-width:960px)
-{
-    .content
-    {
+@media (max-width:960px) {
+    .content {
         width: 100%;
-    }   
+    }
 }
 
 .wizard {
     width: 100%;
 }
 
-@media (max-width:490px)
-{
-    .dialog-medium
-    {
-        width:100%;    
+@media (max-width:490px) {
+    .dialog-medium {
+        width: 100%;
     }
 }
 
-.dialog-medium
-{
-    width:450px;
+.dialog-medium {
+    width: 450px;
 }
 
 .wizard .lui-dialog__body {
@@ -396,6 +410,7 @@
     text-align: center;
     width: 100%;
 }
+
 .ng-file-upload .text {
     margin: 10px 0;
     word-wrap: break-word;
@@ -409,4 +424,3 @@
 .ng-file-upload .drop-box label input {
     display: none;
 }
-
