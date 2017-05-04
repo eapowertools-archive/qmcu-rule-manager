@@ -124,7 +124,8 @@ router.route('/importRules')
         return promise.map(request.body, function(rule) {
             var localId = rule.id;
             var systemRuleToAdd = {};
-            return qrs.Get('systemrule/full?filter=id eq ' + rule.id + " or name eq '" + rule.name + "'")
+            var rulePath = 'systemrule/full?filter=' + encodeURIComponent('id eq ' + rule.id + " or name eq '" + rule.name + "'");
+            return qrs.Get(rulePath)
                 .then(function(result) {
                     var localResult = result.body;
                     if (localResult.length == 0) {

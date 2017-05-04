@@ -112,7 +112,7 @@
         return result;
     };
 
-    function ruleBodyController($scope, $http, ngDialog, Upload, qmcuWindowLocationService) {
+    function ruleBodyController($scope, $http, $timeout, ngDialog, Upload, qmcuWindowLocationService) {
         var model = this;
         var colNames = [];
         model.isImported = false;
@@ -129,6 +129,7 @@
         model.importColumnNames = [];
         model.importTableRows = [];
         model.host = qmcuWindowLocationService.host;
+        $scope.form = {};
 
         model.$onInit = function() {
             fetchTableHeaders($http).then(function(table) {
@@ -170,7 +171,8 @@
                     model.imports.splice(index, 1);
                 }
             }
-            console.log(model.outputs);
+            console.log("exports: " + JSON.stringify(model.outputs));
+            console.log("imports: " + JSON.stringify(model.imports));
         };
 
         model.checkme = function(checkme) {
@@ -265,6 +267,13 @@
                         model.tableRows = response.rows;
                     });
                     setExportColumns();
+                    model.imports = [];
+                })
+                .then(function() {
+                    $timeout(function() { model.closeDialog() }, 5000)
+                        .then(function() {
+                            console.log("import form closed");
+                        });
                 })
                 .catch(function(error) {
                     console.log(error);
@@ -285,8 +294,9 @@
             model.imports = [];
             model.importTableRows = [];
             model.isImported = false;
-            $scope.form.$setPristine();
-            $scope.form.$setUntouched();
+            $scope.form.ruleManagerImportForm.$setPristine();
+            $scope.form.ruleManagerImportForm.$setUntouched();
+
         };
 
     }
@@ -295,7 +305,7 @@
         transclude: true,
         templateUrl: "plugins/ruleManager/rule-manager-body.html",
         controllerAs: "model",
-        controller: ["$scope", "$http", "ngDialog", "Upload", "qmcuWindowLocationService", ruleBodyController]
+        controller: ["$scope", "$http", "$timeout", "ngDialog", "Upload", "qmcuWindowLocationService", ruleBodyController]
     });
 
     module.filter('highlight', function() {

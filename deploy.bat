@@ -1,1 +1,1 @@
-xcopy ruleManager ..\QlikSenseQMCUtility\plugins\ruleManager /I /Y /R /S /EXCLUDE:exclusionList.txt
+xcopy ruleManager ..\..\QlikSenseQMCUtility\plugins\ruleManager /I /Y /R /S /EXCLUDE:exclusionList.txt

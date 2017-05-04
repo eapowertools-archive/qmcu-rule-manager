@@ -1,1 +1,1 @@
-xcopy ruleManager\node_modules ..\QlikSenseQMCUtility\plugins\ruleManager\node_modules /I /Y /R /S
+xcopy ruleManager\node_modules ..\..\QlikSenseQMCUtility\plugins\ruleManager\node_modules /I /Y /R /S
