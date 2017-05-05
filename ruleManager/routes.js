@@ -144,9 +144,7 @@ router.route('/importRules')
                             }).catch(function(error) {
                                 //test again with a new id and see what happens
                                 console.log("trying again");
-                                return "trying again";
-                            })
-                            .then(function() {
+
                                 systemRuleToAdd = rule;
                                 systemRuleToAdd.seedId = rule.id;
                                 delete systemRuleToAdd.createdDate;
